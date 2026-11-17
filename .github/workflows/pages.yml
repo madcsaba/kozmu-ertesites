@@ -1,0 +1,49 @@
+name: Deploy to GitHub Pages
+
+# A finomított PAT nem látja az újonnan létrehozott repókat (403 a Pages API-n),
+# ezért a kiadás a saját CI-jében készül: a GITHUB_TOKEN (pages: write) engedélyezi
+# és publikálja a Pages-t. Indul: main-re pusholáskor vagy kézzel.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pages engedélyezése (Actions-forrás), ha még nincs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          if gh api "repos/$REPO/pages" >/dev/null 2>&1; then
+            echo "A Pages már engedélyezve van."
+          else
+            gh api -X POST "repos/$REPO/pages" -f build_type=workflow
+            echo "Pages engedélyezve (build_type=workflow)."
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
