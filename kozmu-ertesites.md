@@ -100,14 +100,22 @@ A szolgáltatói JSON-ból a build gépi úton településenkénti RSS/Atom csat
 
 | Szolgáltató | Fő csatorna | Értesítés | Géppel olvasható |
 |---|---|---|---|
+| **Áramelosztók** | | | |
 | E.ON | térképes kereső (eon.hu) | online felület, digitális csatornák | nincs |
 | MVM Démász | térkép (mvmhalozat.hu) | 2026 augusztusától postaládás szórólap, lépcsőházi hirdetmény | nincs |
 | MVM Émász | térkép (mvmemaszhalozat.hu) | e-mail, e-mailben igényelve (vevőazonosító + mérésipont-azonosító kell) | nincs |
 | Opus Titász | áramszünet-kereső (opustitasz.hu) | saját mobilapp push értesítéssel | nincs |
+| **Víziközmű-szolgáltatók (2026. novemberi felmérés)** | | | |
 | Fővárosi Vízművek | munkatérkép (vizmuvek.hu) | honlap, 3 nappal előre; mobilapp | nincs |
 | DMRV | hírek + RSS | – | részben (RSS, szűretlen) |
+| ZalaVíz (Zalaegerszeg) | külön „Vízhiány” rovat (zalaviz.hu) | tervezett hálózatöblítés, településenként, dátummal | nincs |
+| Debreceni Vízmű | hírek (debreceni-vizmu.hu) | „Értesítés! vízhiány várható” tárgyú bejegyzés | nincs |
+| Alföldvíz (Békéscsaba) | honlap-hírek + önkormányzati értesítés | tervezett fertőtlenítés, településenként | nincs |
+| Vasivíz (Szombathely) | hírek a főoldalon (vasiviz.hu) | minőségi figyelmeztetés, üzemzavar-közlemény | nincs |
+| ÉRV (Kazincbarcika) | hírek + Facebook | településenkénti értesítés jellemzően a közösségi oldalon | nincs |
+| Bakonykarszt (Veszprém) | „Vízhiány” oldal + Facebook | aktuális vízhiány-oldal; 0–24 órás diszpécser | nincs |
 
-Mind a négy áramelosztó másképp értesít, és egyiknél sincs meghirdetett API vagy RSS; a független tervezettaramszunet.hu aggregátor csak a felületek lekérdezésével dolgozik, és maga is tájékoztató jellegűnek minősíti az adatait. Ez a szabvány ezt a hiányt tölti be.
+Mind a négy áramelosztó másképp értesít, és egyiknél sincs meghirdetett API vagy RSS; a vidéki vízműveknél sincs más: az értesítés honlapi hír, Facebook-poszt vagy önkormányzati közlemény. Két megállapítás mégis biztató: a ZalaVíz külön „Vízhiány” rovatot vezet, a Nemzeti Vízművek pedig anyavállalati szinten is bevezethetné a szabványt a hozzá tartozó több mint tucat vidéki vízműnél. A független tervezettaramszunet.hu aggregátor csak a felületek lekérdezésével dolgozik, és maga is tájékoztató jellegűnek minősíti az adatait. Ez a szabvány ezt a hiányt tölti be.
 
 ## 6. Helyek a telefonon
 
