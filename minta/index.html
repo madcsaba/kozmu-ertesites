@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mintafájlok – Közmű-kimaradási értesítés</title>
+<meta name="description" content="Mintafájlok a KÖZMŰ-KIMARADÁS K1 szabványhoz: JSON, RSS és tömör SMS-forma, kitalált adatokkal.">
+<link rel="stylesheet" href="../assets/fonts.css">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="brand" href="../index.html"><span class="mark">⚡</span> Közmű-értesítés</a>
+  <span class="links">
+    <a href="../index.html">Kezdőlap</a>
+    <a href="../peticio.html">Petíció</a>
+    <a href="../javaslat.html">Javaslat</a>
+    <a href="../szabvany.html">Szabvány</a>
+    <a class="on" href="index.html">Minta</a>
+  </span>
+</nav>
+
+<main class="wrap">
+
+  <header class="hero">
+    <h1>Mintafájlok – KÖZMŰ-KIMARADÁS K1</h1>
+    <p class="sub"><strong>DEMÓ: minden adat kitalált.</strong> A fájlok azt mutatják meg, mit kellene
+      egy szolgáltatónak közzétennie a <a href="../kozmu-ertesites.md">kozmu-ertesites.md</a>
+      szerinti szabvány alapján.</p>
+  </header>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Fájl</th><th>Kinek szól</th></tr></thead>
+      <tbody>
+        <tr><td><a href="kozmu/eon_bp/budapest.json"><code>kozmu/eon_bp/budapest.json</code></a></td>
+          <td>alkalmazásoknak: a teljes, strukturált forma (egy település, több esemény)</td></tr>
+        <tr><td><a href="kozmu/eon_bp/budapest.rss"><code>kozmu/eon_bp/budapest.rss</code></a></td>
+          <td>honlapoknak, RSS-olvasóknak: ugyanaz emberi nyelven</td></tr>
+        <tr><td><a href="kozmu/fv/budapest.json"><code>kozmu/fv/budapest.json</code></a></td>
+          <td>egy vízmű ugyanebben a formában</td></tr>
+        <tr><td><a href="tomor.txt"><code>tomor.txt</code></a></td>
+          <td>SMS, QR-kód, Bluetooth: egysoros, tömör forma</td></tr>
+        <tr><td><a href="kozmu/index.json"><code>kozmu/index.json</code></a></td>
+          <td>a szolgáltatók jegyzéke: ki, milyen szolgáltatásért, mely településekért felel</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="note">A <code>sig</code> mezők helyőrzők (<code>DEMO…</code>): éles rendszerben Ed25519
+    aláírás áll ott, amelyet a telefon az állami tanúsítványlánc alapján ellenőriz.</p>
+
+  <p><a class="btn ghost" href="../szabvany.html">← A szabványhoz</a>
+     <a class="btn ghost" href="https://madcsaba.github.io/felkeszules-kezikonyv/app/">Működő bemutató →</a></p>
+
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div><strong>Közmű-kimaradási értesítés (K1) – tervezet</strong><br>2026. november</div>
+    <div>
+      <a href="../index.html">Kezdőlap</a> ·
+      <a href="../szabvany.html">Szabvány</a> ·
+      <a href="https://github.com/madcsaba/kozmu-ertesites">Forrás</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

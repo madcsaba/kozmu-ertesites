@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Szakpolitikai javaslat – Közmű-kimaradási értesítés</title>
+<meta name="description" content="Javaslat a minisztériumoknak és a MEKH-nek: kormányrendelet a géppel olvasható, hitelesített közmű-kimaradási közzétételről, szabványjavaslattal és nemzetközi példákkal.">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="brand" href="index.html"><span class="mark">⚡</span> Közmű-értesítés</a>
+  <span class="links">
+    <a href="index.html">Kezdőlap</a>
+    <a href="peticio.html">Petíció</a>
+    <a class="on" href="javaslat.html">Javaslat</a>
+    <a href="szabvany.html">Szabvány</a>
+    <a href="https://madcsaba.github.io/felkeszules-kezikonyv/app/">Demó app</a>
+  </span>
+</nav>
+
+<main class="wrap">
+
+  <header class="hero">
+    <h1>Szabványos közmű-kimaradási tájékoztatás – szakpolitikai javaslat</h1>
+    <p class="sub"><em>Tervezet, 2026. november.</em><br>
+      Eredeti forrás: <a href="szakpolitikai-javaslat.md">szakpolitikai-javaslat.md</a></p>
+  </header>
+
+  <div class="panel">
+    <p><strong>Címzettek:</strong> az energiapolitikáért, a víziközmű-szolgáltatásért és az
+      informatikáért felelős miniszterek; továbbá a Magyar Energetikai és Közmű-szabályozási Hivatal
+      (MEKH) és az Országos Katasztrófavédelmi Főigazgatóság.</p>
+    <p><strong>Javaslat:</strong> a kormány rendeletben írja elő, hogy a villamosenergia-elosztók, a
+      víziközmű-szolgáltatók, a földgázelosztók és a távhőszolgáltatók egységes, nyílt, géppel
+      olvasható és hitelesített formában tegyék közzé a tervezett üzemszüneteket és az
+      üzemzavarokat. A formátumot a MEKH adja ki műszaki szabványként, nemzetközi szabványra (CAP)
+      építve.</p>
+  </div>
+
+  <h2><span class="num">1</span>Miért most</h2>
+  <div class="panel">
+    <ul>
+      <li><strong>Széttöredezett tájékoztatás.</strong> A négy áramelosztó négyféleképpen értesít:
+        online felületen, postaládás szórólapon, külön kérésre e-mailben, illetve saját mobilappban.
+        A vízműveknél még vegyesebb a kép. Géppel olvasható, nyilvános csatornát egyik áramelosztó
+        sem hirdet; a független aggregátorok a weboldalak lekérdezésével dolgoznak, és maguk is
+        tájékoztató jellegűnek minősítik az adataikat.</li>
+      <li><strong>A jogalap már megvan.</strong> A Kormány tagjainak feladat- és hatásköréről szóló
+        2026-os rendelet szerint az energiapolitikáért, illetve a víziközmű-szolgáltatásért felelős
+        miniszter az informatikáért felelős miniszterrel egyetértésben dolgozza ki az ágazati
+        infokommunikációs fejlesztési javaslatokat. Ez a javaslat pontosan ilyen.</li>
+      <li><strong>A kötelező értesítés ma is létezik.</strong> Az áramelosztók a 200 kVA alatti
+        felhasználókat 15 nappal a munka előtt kötelesek értesíteni, különben kötbért fizetnek. A
+        javaslat nem új kötelezettséget teremt, hanem a meglévő értesítés formáját egységesíti.</li>
+      <li><strong>Az uniós lakossági riasztórendszer erre épülhet.</strong> Az EU minden tagállamtól
+        megköveteli a mobiltelefonokra küldött, földrajzilag célzott lakossági riasztást; egy
+        egységes közmű-adatforrás ennek is természetes kiegészítője.</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">2</span>Mit nyernek az állampolgárok</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Helyzet</th><th>Ma</th><th>A szabvánnyal</th></tr></thead>
+      <tbody>
+        <tr><td>Nincs áram otthon</td><td>Ki kell deríteni, melyik elosztóé a terület, és megkeresni a honlapján</td><td>A telefon azonnal mutatja: tervezett vagy hiba, mi az oka, mikorra várható a helyreállítás</td></tr>
+        <tr><td>Több ingatlan, idős szülő, nyaraló</td><td>Szolgáltatónként és címenként külön regisztráció</td><td>Egy alkalmazásban minden mentett hely, minden szolgáltató</td></tr>
+        <tr><td>Nem magyar anyanyelvű lakos, turista</td><td>Csak magyar szöveg</td><td>A kódolt üzenetet a telefon a saját nyelvén jeleníti meg</td></tr>
+        <tr><td>Vihar, hőhullám, tömeges kimaradás</td><td>Túlterhelt hibabejelentő, keresgélés gyenge mobilneten</td><td>Kis adatforgalmú, SMS-be is beleférő értesítés; kevesebb fölösleges hívás</td></tr>
+        <tr><td>Önkormányzat, kórház, idősotthon</td><td>Kézzel másolt értesítések, Facebook-posztok</td><td>Automatikus átvétel a saját rendszerükbe, RSS-ben is</td></tr>
+        <tr><td>Hamis „vízhiány”- vagy „áramszünet”-üzenet</td><td>Nehéz megkülönböztetni a valóditól</td><td>A digitális aláírás miatt a hamis üzenet nem jelenik meg hivatalosként</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="num">3</span>Javasolt szabályozás</h2>
+  <div class="panel">
+    <ol>
+      <li><strong>Kormányrendelet</strong> a közzétételi kötelezettségről: kire vonatkozik (minden
+        engedélyes elosztó és víziközmű-szolgáltató), mit kell közzétenni (tervezett üzemszünet,
+        üzemzavar, korlátozás, vízminőségi figyelmeztetés), milyen határidővel (tervezett munka a
+        mostani 15 napos értesítéssel egy időben, üzemzavar a tudomásszerzéstől számított 30
+        percen belül, a helyreállítás azonnal).</li>
+      <li><strong>MEKH-rendelet vagy -ajánlás</strong> a műszaki szabványról: adatmezők, kódlisták,
+        terjesztési formák (JSON, RSS/Atom, tömör SMS-forma), aláírás.</li>
+      <li><strong>Állami tanúsítványlánc:</strong> az állami gyökérkulcs alól minden szolgáltató
+        saját kulcsot kap, amely csak a saját szolgáltatására és ellátási területére érvényes.
+        Kezelése az állami IT-szolgáltatónál vagy a katasztrófavédelemnél.</li>
+      <li><strong>Országos továbbító</strong> az SMS- és e-mail-értesítésekhez, egy helyen kezelt,
+        visszavonható hozzájárulással; cím és ügyfélazonosító nélkül.</li>
+      <li><strong>Adatvédelmi garancia a jogszabályban</strong>: a közzétett adat terület, nem
+        személy; az érintettséget a lakos eszköze dönti el.</li>
+      <li><strong>Nyílt adat</strong>: a közzétett adatok szabadon felhasználhatók
+        (alkalmazásfejlesztők, kutatók, sajtó), az aláírás pedig garantálja a forrást.</li>
+    </ol>
+  </div>
+
+  <h2><span class="num">4</span>Ütemezés és költség</h2>
+  <div class="panel">
+    <ul>
+      <li><strong>0–6. hónap:</strong> szabványtervezet társadalmi egyeztetése a szolgáltatókkal, a
+        MEKH-hel és a katasztrófavédelemmel; kísérleti üzem egy áramelosztóval és egy vízművel.</li>
+      <li><strong>6–12. hónap:</strong> kötelező közzététel a négy áramelosztónál; a
+        víziközmű-szolgáltatóknál önkéntes, a kisebbeknek közös, egyszerű feltöltőfelület.</li>
+      <li><strong>12–24. hónap:</strong> kötelező a víz-, gáz- és távhőszolgáltatóknak is; az
+        országos továbbító indulása.</li>
+      <li><strong>Költség:</strong> a szolgáltatóknál a meglévő üzemzavar-kezelő rendszerük (amely
+        ma a weboldali térképet táplálja) egy exportfelülettel bővül; a közzététel statikus fájl,
+        külön infrastruktúra nem kell. Állami oldalon a tanúsítványkezelés és a továbbító
+        üzemeltetése. Becsült nagyságrendet a kísérleti üzem adna.</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">5</span>Nyitott kérdések az egyeztetéshez</h2>
+  <div class="panel">
+    <ul>
+      <li>Ki üzemelteti az országos továbbítót és a tanúsítványláncot?</li>
+      <li>Lehet-e a Központi Címregiszter azonosítóit településenként nyilvánosan letölthetővé
+        tenni az utcaszintű pontossághoz?</li>
+      <li>Hogyan kapcsolódjon a katasztrófavédelem lakossági riasztórendszeréhez (súlyos, tömeges
+        kimaradásnál)?</li>
+      <li>Kapjon-e a magyar rendszer egy egységes, könnyen megjegyezhető hibabejelentő számot,
+        mint az Egyesült Királyságban a 105?</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">6</span>Szabványjavaslat (KÖZMŰ-KIMARADÁS K1)</h2>
+  <p>A javaslat a nemzetközi Common Alerting Protocol (CAP 1.2) magyar profilja közmű-kimaradásokra.
+    A teljes műszaki leírás: <a href="szabvany.html">szabvany.html</a>;
+    mintafájlok: <a href="minta/">minta/</a>.</p>
+
+  <h3>Alapelvek</h3>
+  <div class="panel">
+    <ol>
+      <li><strong>Terület, nem személy.</strong> A szolgáltató a kimaradás területét teszi közzé; a
+        cím nem hagyja el a lakos telefonját.</li>
+      <li><strong>A település a közös kulcs</strong> (KSH településazonosító), utcaszinten a
+        Központi Címregiszter azonosítói.</li>
+      <li><strong>Kódok utaznak, nem szöveg</strong>, így bármely nyelvre lefordítható, és elfér egy
+        SMS-ben.</li>
+      <li><strong>Minden üzenet aláírt</strong>, és a kulcs csak a kiadó saját szolgáltatására és
+        területére érvényes.</li>
+      <li><strong>Egy forrás, több kimenet:</strong> JSON alkalmazásoknak, RSS/Atom honlapoknak,
+        tömör forma SMS-hez és QR-kódhoz.</li>
+    </ol>
+  </div>
+
+  <h3>Adatmezők</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Mező</th><th>Tartalom</th><th>Példa</th></tr></thead>
+      <tbody>
+        <tr><td><code>service</code></td><td>szolgáltatás</td><td><code>E</code> áram, <code>V</code> ivóvíz, <code>G</code> gáz, <code>T</code> távhő, <code>S</code> szennyvíz</td></tr>
+        <tr><td><code>kind</code></td><td>típus</td><td><code>Z</code> üzemzavar, <code>T</code> tervezett, <code>K</code> korlátozás, <code>M</code> minőségi figyelmeztetés</td></tr>
+        <tr><td><code>state</code></td><td>állapot</td><td><code>B</code> bejelentve, <code>F</code> folyamatban, <code>H</code> helyreállt, <code>X</code> visszavonva</td></tr>
+        <tr><td><code>cause</code></td><td>ok</td><td><code>c1</code> hálózati hiba, <code>c2</code> karbantartás, <code>c3</code> csőtörés, <code>c4</code> időjárás, <code>c5</code> külső kár, <code>c6</code> kapacitáshiány, <code>c9</code> vizsgálat alatt</td></tr>
+        <tr><td><code>area</code></td><td>érintett terület</td><td>településkódok, opcionálisan utcalista vagy sokszög</td></tr>
+        <tr><td><code>onset</code>, <code>expectedRestore</code></td><td>időpontok</td><td>kezdet, várható helyreállítás</td></tr>
+        <tr><td><code>households</code></td><td>érintett felhasználók száma</td><td>1240</td></tr>
+        <tr><td><code>replacement</code></td><td>pótlás</td><td>lajtos kocsi, szükségkút, aggregátor helye</td></tr>
+        <tr><td><code>sig</code></td><td>digitális aláírás</td><td>Ed25519</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A tömör forma egy sor; aláírással együtt kb. 125 karakter, tehát egy SMS-be belefér:</p>
+<pre><code>K1|E|Z|F|c4|&lt;KSH-kód&gt;|&lt;kezdet&gt;|&lt;várható vég&gt;|eon_bp|&lt;aláírás&gt;</code></pre>
+
+  <h2><span class="num">7</span>Nemzetközi példák</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Ország / rendszer</th><th>Mit csinál</th><th>Mit veszünk át</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Egyesült Királyság – ENA NEO API</strong></td><td>Az elosztók ágazati szövetsége (ENA) közös API-specifikációt adott ki a kimaradásokra; a UK Power Networks közel valós idejű, tervezett és nem tervezett kimaradásokat ad közre nyílt adatként, API-n</td><td>Egy ágazati specifikáció, minden elosztó ugyanazt adja</td></tr>
+        <tr><td><strong>Egyesült Királyság – 105</strong></td><td>2016 óta egyetlen ingyenes, háromjegyű szám minden áramelosztóhoz; az elosztók finanszírozzák. Az előzmény: a felmérés szerint az emberek 72%-a nem tudta, kit hívjon áramszünetnél</td><td>Egységes belépési pont a lakosnak</td></tr>
+        <tr><td><strong>CAP (OASIS, ITU-T X.1303)</strong></td><td>Nemzetközi riasztási szabvány; az USA (IPAWS), Kanada (CAP-CP), Ausztrália (CAP-AU-STD) és más országok saját profilt készítettek belőle</td><td>Adatmodell, saját magyar profil</td></tr>
+        <tr><td><strong>MeteoAlarm (Európa)</strong></td><td>36 európai meteorológiai szolgálat közös figyelmeztető rendszere, CAP-hírcsatornákkal</td><td>CAP + hírcsatorna (RSS/Atom) együtt</td></tr>
+        <tr><td><strong>EU-Alert (EECC 110. cikk)</strong></td><td>Minden uniós tagállamnak 2022 júniusáig kellett lakossági riasztórendszert működtetnie mobiltelefonokra</td><td>Súlyos kimaradásnál beköthető a riasztórendszerbe</td></tr>
+        <tr><td><strong>USA – kereskedelmi aggregátorok</strong></td><td>Magáncégek több száz amerikai, kanadai és brit szolgáltató adatait egységesítik egy API-ba, 10 percenkénti frissítéssel</td><td>Bizonyíték az igényre; szabvány nélkül a piac fizetős közvetítőkkel tölti ki a hiányt</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A tanulság: ahol nincs közös szabvány, ott magáncégek gyűjtik össze az adatot, fizetős
+    szolgáltatásként. Ahol van (Egyesült Királyság), ott az elosztók maguk adják nyíltan, egy
+    formában. Magyarországon négy áramelosztó van, így a megegyezés gyorsan elérhető.</p>
+
+  <h2><span class="num">8</span>Források</h2>
+  <div class="panel">
+    <p><strong>Hazai helyzet</strong></p>
+    <ul>
+      <li><a href="https://www.mvmnext.hu/aram/pages/online/aramszunet.jsf">MVM: Tervezett áramszünetek listája (Démász)</a></li>
+      <li><a href="https://mvmemaszhalozat.hu/ugyfeleinknek/hasznos-informaciok/tervezett-aramszunetek">MVM Émász: Tervezett áramszünetek és e-mailes értesítés</a></li>
+      <li><a href="https://www.szegedamindenem.hu/belfold/valtozik-a-tervezett-aramszunetekrol-szolo-ertesites-modja-az-mvm-demasz-teruleten/">Szeged a mindenem: Változik az értesítés módja az MVM Démász területén</a></li>
+      <li><a href="https://apps.apple.com/hu/app/opus-energetika-%C3%A1ramapp/id6477295912">OPUS ENERGETIKA Áramapp (App Store)</a></li>
+      <li><a href="https://index.hu/bcs/2026/11/16/miert-van-tervezett-aramszunet-eon">Index: Tervezett áramszünet – E.ON tájékoztatás</a></li>
+      <li><a href="https://eon.hu/content/dam/eon/eon-hungary/documents/hatarozatok-szabalyzatok-aram/garantalt-szolgaltatasok/2018_garant%C3%A1lt_szolg%C3%A1ltat%C3%A1sok.pdf">E.ON: Garantált szolgáltatások (15 napos értesítés)</a></li>
+      <li><a href="https://www.vizmuvek.hu/hu/kezdolap/informaciok/munkaterkep-hol-dolgozunk">Fővárosi Vízművek: Munkatérkép</a></li>
+      <li><a href="https://www.dmrvzrt.hu/hu/hirek">DMRV: Hírek (RSS)</a></li>
+      <li><a href="https://tervezettaramszunet.hu/">tervezettaramszunet.hu (független aggregátor)</a></li>
+      <li><a href="https://magyarkozlony.bsdnet.hu/kozlony/7">Magyar Közlöny 2026/46: a Kormány tagjainak feladat- és hatásköre</a></li>
+    </ul>
+    <p><strong>Nemzetközi példák</strong></p>
+    <ul>
+      <li><a href="https://ukpowernetworks.opendatasoft.com/explore/assets/ukpn-national-energy-outage/">UK Power Networks: National Energy Outage API</a></li>
+      <li><a href="https://www.westernpower.co.uk/news-and-events/latest-news/105-is-now-live">Western Power: 105 is now live</a></li>
+      <li><a href="https://networks.online/power/national-105-power-cut-number-launched">Networks: National 105 power cut number launched</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Common_Alerting_Protocol">Wikipedia: Common Alerting Protocol</a></li>
+      <li><a href="https://wmo.int/media/magazine-article/leveraging-common-alerting-protocol-and-cell-broadcast-technology-advancing-early-warnings-all">WMO: CAP és cell broadcast, MeteoAlarm</a></li>
+      <li><a href="https://interoperable-europe.ec.europa.eu/node/704086">Interoperable Europe: EECC 110. cikk</a></li>
+      <li><a href="https://poweroutage.us/use-our-data">PowerOutage.us: aggregált kimaradási API</a></li>
+    </ul>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div><strong>Közmű-kimaradási értesítés (K1) – tervezet</strong><br>2026. november</div>
+    <div>
+      <a href="index.html">Kezdőlap</a> ·
+      <a href="peticio.html">Petíció</a> ·
+      <a href="szabvany.html">Szabvány</a> ·
+      <a href="https://github.com/madcsaba/kozmu-ertesites">Forrás</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

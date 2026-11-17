@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Közmű-kimaradási értesítés – szabvány, petíció, javaslat</title>
+<meta name="description" content="Egységes, géppel olvasható, aláírt közmű-kimaradási értesítés: szabványtervezet, petíció a szolgáltatókhoz és szakpolitikai javaslat.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Közmű-kimaradási értesítés – tudjuk meg egy helyen, miért nincs áram vagy víz">
+<meta property="og:description" content="Egységes, géppel olvasható, aláírt közmű-kimaradási értesítés: szabványtervezet, petíció a szolgáltatókhoz és szakpolitikai javaslat.">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="brand" href="index.html"><span class="mark">⚡</span> Közmű-értesítés</a>
+  <span class="links">
+    <a class="on" href="index.html">Kezdőlap</a>
+    <a href="peticio.html">Petíció</a>
+    <a href="javaslat.html">Javaslat</a>
+    <a href="szabvany.html">Szabvány</a>
+    <a href="https://madcsaba.github.io/felkeszules-kezikonyv/app/">Demó app</a>
+  </span>
+</nav>
+
+<main class="wrap">
+
+  <header class="hero">
+    <h1>Tudjuk meg egy helyen, miért nincs áram vagy víz</h1>
+    <p class="sub">Szabványtervezet, petíció a közműszolgáltatókhoz és szakpolitikai javaslat ahhoz,
+      hogy az áram-, víz-, gáz- és távhőszolgáltatók <strong>egyféle, géppel olvasható, aláírt</strong>
+      formában közöljék a kimaradásokat — a lakos pedig a saját helyeire szűrve, a saját nyelvén
+      tudja meg, mi történt.</p>
+    <div class="actions">
+      <a class="btn" href="peticio.html">✍️ Petíció megtekintése</a>
+      <a class="btn ghost" href="szabvany.html">📐 A szabvány</a>
+      <a class="btn ghost" href="javaslat.html">🏛 Szakpolitikai javaslat</a>
+    </div>
+  </header>
+
+  <p class="note"><b>Tervezet, 2026. november.</b> Az oldal szakmai vitaanyag, nem hivatalos szolgáltatás.
+    A mintaadatok kitaláltak; a működő bemutatót a
+    <a href="https://madcsaba.github.io/felkeszules-kezikonyv/app/">Felkészülés mobilapp</a> mutatja be.</p>
+
+  <h2><span class="num">1</span>A probléma</h2>
+  <div class="panel">
+    <p>Ha otthon elmegy az áram vagy nem jön víz a csapból, az első kérdés mindig ugyanaz:
+      <strong>nálunk van baj, vagy az egész utcában? Tervezett munka vagy hiba? Mikorra jön vissza?</strong></p>
+    <p>Ma ezt csak úgy tudhatjuk meg, ha tudjuk, melyik cég az illetékes, megtaláljuk a honlapját,
+      és ott kikeressük a címünket. A négy áramelosztó négyféleképp értesít, és egyiknél sincs
+      meghirdetett, géppel olvasható csatorna:</p>
+    <ul>
+      <li><strong>Széttöredezett felületek.</strong> Online térképes kereső, postaládás szórólapon bedobott
+        értesítés, külön igénylésre küldött e-mail, saját mobilapp — szolgáltatónként más és más.</li>
+      <li><strong>Nincs gépi hozzáférés.</strong> Egyik elosztónál sincs nyilvános API vagy szűrt RSS;
+        a független aggregátorok a weboldalakat kérdezgetik le, és maguk is tájékoztató jellegűnek
+        minősítik az adataikat.</li>
+      <li><strong>Nyelv és cím.</strong> Csak magyar szöveg; a több ingatlannal, idős szülőkkel vagy
+        nyaralóval élőknek szolgáltatónként és címenként kell regisztrálniuk.</li>
+      <li><strong>Nincs hitelesítés.</strong> Egy hamis „vízhiány”-üzenetet ma nehéz megkülönböztetni
+        a valóditól.</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">2</span>A megoldás: KÖZMŰ-KIMARADÁS K1</h2>
+  <div class="cards">
+    <div class="card"><span class="ico">📍</span><h3>A cím nem hagyja el a telefont</h3>
+      <p>A szolgáltató a kimaradás <em>területét</em> teszi közzé; a telefon helyben dönti el, hogy a
+        mentett helyek érintettek-e.</p></div>
+    <div class="card"><span class="ico">🏘</span><h3>A település a közös kulcs</h3>
+      <p>KSH településazonosító, utcaszinten a Központi Címregiszter azonosítói — minden szolgáltató
+        ugyanezzel dolgozik.</p></div>
+    <div class="card"><span class="ico">🔤</span><h3>Kódok utaznak, nem szöveg</h3>
+      <p>Szolgáltatás, típus, ok: rögzített kódlista. A szöveget a telefon állítja össze bármelyik
+        nyelven — ezért elfér SMS-ben és QR-kódban is.</p></div>
+    <div class="card"><span class="ico">🔏</span><h3>Minden üzenet aláírt</h3>
+      <p>A szolgáltató csak a saját területére és szolgáltatására írhat; a telefon az állami
+        tanúsítványlánc alapján ellenőrzi.</p></div>
+    <div class="card"><span class="ico">🌐</span><h3>CAP 1.2-kompatibilis</h3>
+      <p>A teljes forma a nemzetközi Common Alerting Protocol profilja, így katasztrófavédelmi
+        rendszerekbe is beköthető.</p></div>
+    <div class="card"><span class="ico">✉️</span><h3>Egy SMS-be belefér</h3>
+      <p>A tömör forma aláírással együtt kb. 130 karakter: gyenge mobilhálózaton, QR-ben és
+        Bluetoothon is továbbítható.</p></div>
+  </div>
+
+  <h2><span class="num">3</span>Mit tartalmaz ez az oldal?</h2>
+  <div class="cards">
+    <a class="card" href="peticio.html"><span class="ico">✍️</span><h3>Petíció a szolgáltatókhoz</h3>
+      <p>Hat pontban kérjük az áram-, víz-, gáz- és távhőszolgáltatókat a géppel olvasható,
+        hitelesített közzétételre.</p></a>
+    <a class="card" href="javaslat.html"><span class="ico">🏛️</span><h3>Szakpolitikai javaslat</h3>
+      <p>Javaslat a minisztériumoknak és a MEKH-nek: kormányrendelet, műszaki szabvány, állami
+        tanúsítványlánc, ütemezés és nemzetközi példák.</p></a>
+    <a class="card" href="szabvany.html"><span class="ico">📐</span><h3>A szabvány (K1)</h3>
+      <p>Alapelvek, kódlisták, a teljes JSON-forma, tömör SMS-forma, terjesztési csatornák,
+        adatvédelem, bevezetési útmutató.</p></a>
+    <a class="card" href="minta/"><span class="ico">🗂️</span><h3>Mintafájlok</h3>
+      <p>Működő példák kitalált adatokkal: JSON egy településre, RSS-csatorna, tömör SMS-forma és
+        a szolgáltatói jegyzék.</p></a>
+    <a class="card" href="https://madcsaba.github.io/felkeszules-kezikonyv/app/"><span class="ico">📱</span><h3>Működő bemutató</h3>
+      <p>A Felkészülés mobilapp „Helyben” képernyője megmutatja, hogyan jelenne meg a valós, aláírt
+        értesítés a lakos telefonján.</p></a>
+    <a class="card" href="https://madcsaba.github.io/felkeszules-kezikonyv/"><span class="ico">📖</span><h3>Felkészülési kézikönyv</h3>
+      <p>A 72 órás önellátás kézikönyve, amelynek ez a közmű-anyag a kísérő kiadványa.</p></a>
+  </div>
+
+  <h2><span class="num">4</span>A mai helyzet (2026. november, felmérés)</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Szolgáltató</th><th>Fő csatorna</th><th>Értesítés</th><th>Géppel olvasható</th></tr></thead>
+      <tbody>
+        <tr><td>E.ON</td><td>térképes kereső (eon.hu)</td><td>online felület, digitális csatornák</td><td>nincs</td></tr>
+        <tr><td>MVM Démász</td><td>térkép (mvmhalozat.hu)</td><td>2026 augusztusától postaládás szórólap, lépcsőházi hirdetmény</td><td>nincs</td></tr>
+        <tr><td>MVM Émász</td><td>térkép (mvmemaszhalozat.hu)</td><td>e-mail, e-mailben igényelve (vevőazonosító + mérésipont-azonosító kell)</td><td>nincs</td></tr>
+        <tr><td>Opus Titász</td><td>áramszünet-kereső (opustitasz.hu)</td><td>saját mobilapp push értesítéssel</td><td>nincs</td></tr>
+        <tr><td>Fővárosi Vízművek</td><td>munkatérkép (vizmuvek.hu)</td><td>honlap, 3 nappal előre; mobilapp</td><td>nincs</td></tr>
+        <tr><td>DMRV</td><td>hírek + RSS</td><td>–</td><td>részben (RSS, szűretlen)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Mind a négy áramelosztó másképp értesít, és egyiknél sincs meghirdetett API vagy RSS.
+    A szabvány ezt a hiányt tölti be — részletek a
+    <a href="szabvany.html#helyzet">szabvány 5/b pontjában</a>.</p>
+
+  <h2><span class="num">5</span>Hogyan néz ki?</h2>
+  <div class="panel">
+    <p><strong>Tömör forma</strong> — SMS-hez, QR-kódhoz, Bluetoothon át, gyenge hálózaton. Egy sor,
+      <code>|</code> jellel tagolva, a végén aláírással:</p>
+<pre><code>K1|E|Z|F|c4|&lt;KSH-kód&gt;|&lt;kezdet&gt;|&lt;várható vég&gt;|eon_bp|&lt;aláírás&gt;</code></pre>
+    <p><strong>Teljes forma</strong> — alkalmazásoknak és weboldalaknak, JSON-ban, a CAP 1.2 mezőinek
+      megfelelő nevekkel; a szolgáltató statikus fájlként teszi közzé a saját webhelyén:</p>
+<pre><code>{
+  "v": "K1",
+  "id": "eon_bp-2026-11-16-0042",
+  "service": "E", "kind": "Z", "state": "F", "cause": "c4",
+  "area": { "settlements": ["&lt;KSH-kód&gt;"], "streets": ["KCR:…"] },
+  "expectedRestore": "2026-11-16T13:30:00+01:00",
+  "sig": "ed25519:…"
+}</code></pre>
+    <p>A <a href="szabvany.html">teljes szabvány</a> leírja a kódlistákat, a terjesztési csatornákat
+      (statikus fájl, push, SMS, e-mail, RSS), az adatvédelmi garanciákat és a szolgáltatói
+      bevezetés négy lépését. Példák a <a href="minta/">mintafájlokban</a>.</p>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <strong>Közmű-kimaradási értesítés (K1) – tervezet</strong><br>
+      2026. november · szakmai vitaanyag, nem hivatalos szolgáltatás
+    </div>
+    <div>
+      <a href="peticio.html">Petíció</a> ·
+      <a href="javaslat.html">Javaslat</a> ·
+      <a href="szabvany.html">Szabvány</a> ·
+      <a href="https://github.com/madcsaba/kozmu-ertesites">Forrás és README</a> ·
+      <a href="https://madcsaba.github.io/felkeszules-kezikonyv/">Felkészülési kézikönyv</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

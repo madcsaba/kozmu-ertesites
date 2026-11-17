@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A szabvány (K1) – Közmű-kimaradási értesítés</title>
+<meta name="description" content="A KÖZMÜ-KIMARADÁS K1 szabványtervezet teljes műszaki leírása: alapelvek, kódlisták, JSON- és SMS-forma, terjesztés, adatvédelem, bevezetés.">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="brand" href="index.html"><span class="mark">⚡</span> Közmű-értesítés</a>
+  <span class="links">
+    <a href="index.html">Kezdőlap</a>
+    <a href="peticio.html">Petíció</a>
+    <a href="javaslat.html">Javaslat</a>
+    <a class="on" href="szabvany.html">Szabvány</a>
+    <a href="https://madcsaba.github.io/felkeszules-kezikonyv/app/">Demó app</a>
+  </span>
+</nav>
+
+<main class="wrap">
+
+  <header class="hero">
+    <h1>Közmű-kimaradási értesítés – javasolt szabvány</h1>
+    <p class="sub">Tervezet, 2026. november. Mintafájlok: <a href="minta/">minta/</a>.
+      Petíció: <a href="peticio.html">peticio.html</a> · Szakpolitikai javaslat:
+      <a href="javaslat.html">javaslat.html</a> · Eredeti forrás:
+      <a href="kozmu-ertesites.md">kozmu-ertesites.md</a></p>
+    <p class="sub">Célja, hogy az áram-, víz-, gáz- és távhőszolgáltatók <strong>egyféle, géppel
+      olvasható, aláírt</strong> formában közöljék a kimaradásokat, és a lakos telefonja a
+      <strong>saját helyeire</strong> szűrve, <strong>a saját nyelvén</strong> mutassa meg, miért
+      nincs áram vagy víz.</p>
+  </header>
+
+  <h2 id="alapelvek"><span class="num">1</span>Alapelvek</h2>
+  <div class="panel">
+    <ol>
+      <li><strong>A cím nem hagyja el a telefont.</strong> A szolgáltató a kimaradás <em>területét</em>
+        teszi közzé, a telefon helyben dönti el, hogy a mentett helyek érintettek-e.</li>
+      <li><strong>A település a közös kulcs.</strong> A víziközmű-törvény az ellátási területet
+        településekben határozza meg, az áramhálózati elosztók is településenként dolgoznak.
+        Azonosító: a KSH településazonosító törzsszám. Utcaszintű pontosításhoz a Központi
+        Címregiszter (KCR) azonosítói.</li>
+      <li><strong>Kódok utaznak, nem szöveg.</strong> Szolgáltatás, típus, ok: rögzített kódlista. A
+        szöveget a telefon állítja össze bármelyik nyelven, ezért elfér SMS-ben és QR-kódban is.</li>
+      <li><strong>Minden üzenet aláírt, és a szolgáltató csak a saját területére és szolgáltatására
+        írhat.</strong> Ezt a telefon ellenőrzi az állami tanúsítványlánc alapján.</li>
+      <li><strong>CAP 1.2-kompatibilis.</strong> A teljes forma a nemzetközi Common Alerting
+        Protocol profila, így katasztrófavédelmi rendszerekbe is beköthető.</li>
+    </ol>
+  </div>
+
+  <h2><span class="num">2</span>Kódlisták</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Mező</th><th>Kódok</th></tr></thead>
+      <tbody>
+        <tr><td>Szolgáltatás</td><td><code>E</code> áram · <code>V</code> ivóvíz · <code>G</code> gáz · <code>T</code> távhő · <code>S</code> szennyvíz</td></tr>
+        <tr><td>Típus</td><td><code>Z</code> üzemzavar · <code>T</code> tervezett munka · <code>K</code> korlátozás (pl. vízkorlátozás) · <code>M</code> minőségi figyelmeztetés (pl. vízforralás)</td></tr>
+        <tr><td>Állapot</td><td><code>B</code> bejelentve · <code>F</code> folyamatban · <code>H</code> helyreállt · <code>X</code> visszavonva</td></tr>
+        <tr><td>Ok</td><td><code>c1</code> hálózati hiba · <code>c2</code> karbantartás · <code>c3</code> csőtörés · <code>c4</code> időjárás · <code>c5</code> harmadik fél okozta kár · <code>c6</code> kapacitáshiány · <code>c9</code> vizsgálat alatt</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="num">3</span>Teljes forma (alkalmazásoknak, weboldalaknak)</h2>
+  <p>JSON, a CAP 1.2 mezőinek megfelelő nevekkel. A szolgáltató statikus fájlként teszi közzé
+    (lásd 5. pont).</p>
+<pre><code>{
+  "v": "K1",
+  "id": "eon_bp-2026-11-16-0042",
+  "issuer": "eon_bp",
+  "sent": "2026-11-16T10:40:00+01:00",
+  "status": "Actual",
+  "msgType": "Update",
+  "service": "E",
+  "kind": "Z",
+  "state": "F",
+  "cause": "c4",
+  "onset": "2026-11-16T10:12:00+01:00",
+  "expectedRestore": "2026-11-16T13:30:00+01:00",
+  "area": {
+    "settlements": ["&lt;KSH-kód&gt;"],
+    "streets": ["KCR:…", "KCR:…"],
+    "polygon": null
+  },
+  "households": 1240,
+  "replacement": { "kind": "aggregátor", "where": "…" },
+  "infoUrl": "https://…",
+  "faultPhone": "…",
+  "note": { "hu": "Szabad szöveg, opcionális" },
+  "sig": "ed25519:…"
+}</code></pre>
+  <div class="panel">
+    <ul>
+      <li>Az <code>area</code> legalább egy települést tartalmaz. Az utcalista és a sokszög
+        opcionális; ha van, a telefon pontosabban szűr.</li>
+      <li>Frissítésnél ugyanaz az <code>id</code>, új <code>sent</code> és <code>state</code>. A
+        helyreállítás külön üzenet (<code>state: "H"</code>), így a telefon le tudja zárni a
+        kimaradást.</li>
+      <li><code>note</code>: szabad szöveg, csak kiegészítés. A lényeg mindig a kódokban van.</li>
+      <li>A <code>replacement</code> vízhiánynál a lajtos kocsi vagy szükségkút helye,
+        áramszünetnél az aggregátor.</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">4</span>Tömör forma (SMS, QR, Bluetooth, gyenge hálózat)</h2>
+  <p>Egy sor, <code>|</code> jellel tagolva, a végén aláírással:</p>
+<pre><code>K1|E|Z|F|c4|&lt;KSH-kód&gt;|&lt;kezdet&gt;|&lt;várható vég&gt;|eon_bp|&lt;aláírás&gt;</code></pre>
+  <div class="panel">
+    <ul>
+      <li>Az időpontok percben, 36-os számrendszerben (5 karakter).</li>
+      <li>Az aláírás 64 bájtos Ed25519, base64-ben 86 karakter.</li>
+      <li>Aláírás nélkül kb. 40 bájt, aláírással kb. 130 karakter, tehát <strong>egy SMS-be
+        belefér</strong>.</li>
+      <li>Utcalista nem fér bele, ezért a tömör forma településszintű. Utcaszintű pontosítás a
+        teljes formában jön, ha van net.</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">5</span>Terjesztés</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Csatorna</th><th>Ki küldi</th><th>Mit tud a lakosról</th><th>Megjegyzés</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Statikus fájl</strong></td><td>szolgáltató</td><td>semmit</td><td><code>…/kozmu/{szolgáltató}/{település}.json</code>. A telefon csak a saját helyei településeit kéri le, ETag-gel (változatlannál pár száz bájt).</td></tr>
+        <tr><td><strong>Push</strong></td><td>országos továbbító</td><td>semmit</td><td>Témára iratkozás: <code>kozmu.{település}.{szolgáltatás}</code>. Személyes adat nélkül.</td></tr>
+        <tr><td><strong>SMS</strong></td><td>országos továbbító</td><td>telefonszám + települések</td><td>Csak ha a lakos kéri (kettős megerősítés). Cím nincs.</td></tr>
+        <tr><td><strong>E-mail</strong></td><td>országos továbbító</td><td>e-mail-cím + települések</td><td>Mint az SMS.</td></tr>
+        <tr><td><strong>Továbbadás</strong></td><td>lakos</td><td>semmit</td><td>QR vagy Bluetooth a tömör formával, aláírás miatt hamisíthatatlan.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel">
+    <p>Az SMS- és e-mail-feliratkozást <strong>egy helyen</strong>, az országos továbbítónál kell
+      kezelni, nem szolgáltatónként. Így a lakos egyszer adja meg az elérhetőségét, akárhány helye
+      és szolgáltatója van, és egy helyen tudja visszavonni.</p>
+    <p>A szolgáltatók meglévő, ingatlanhoz kötött értesítései (például az E.ON online
+      ügyfélszolgálatán beállítható SMS és e-mail) megmaradnak. Ez a szabvány nem kiváltja őket,
+      hanem egységes, nyelvfüggetlen csatornát ad melléjük.</p>
+  </div>
+
+  <h3>5/a. RSS/Atom kimenet</h3>
+  <div class="panel">
+    <p>A szolgáltatói JSON-ból a build gépi úton településenkénti RSS/Atom csatornát is előállít:</p>
+<pre><code>…/kozmu/{szolgáltató}/{település}.rss</code></pre>
+    <ul>
+      <li>Egy tétel = egy esemény aktuális állapota; a <code>guid</code> az esemény <code>id</code>-je,
+        frissítésnél a <code>pubDate</code> változik, a helyreállítás (<code>state: H</code>) külön
+        tétellel zárja le.</li>
+      <li>A cím és a leírás a kódokból előállított, ember által olvasható szöveg (alapból magyarul),
+        a <code>link</code> a teljes JSON-ra mutat.</li>
+      <li>Célja a kompatibilitás: RSS-olvasók, önkormányzati honlapok és hírportálok ezt veszik át,
+        az app a strukturált, aláírt JSON-t használja. Az RSS-ben aláírás nincs, ezért hivatalos
+        forrásként csak a szolgáltató saját domainjéről érvényes.</li>
+      <li>Előkép a gyakorlatból: a DMRV hírcsatornája (dmrvzrt.hu/hu/rss/hirek) már ma RSS-ben
+        közli a vízhiányokat, de szűretlenül, vegyes hírek között — a településenkénti bontás és a
+        kódolt tartalom ezt teszi géppel feldolgozhatóvá.</li>
+    </ul>
+  </div>
+
+  <h3 id="helyzet">5/b. A mai helyzet (2026. november, felmérés)</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Szolgáltató</th><th>Fő csatorna</th><th>Értesítés</th><th>Géppel olvasható</th></tr></thead>
+      <tbody>
+        <tr><td>E.ON</td><td>térképes kereső (eon.hu)</td><td>online felület, digitális csatornák</td><td>nincs</td></tr>
+        <tr><td>MVM Démász</td><td>térkép (mvmhalozat.hu)</td><td>2026 augusztusától postaládás szórólap, lépcsőházi hirdetmény</td><td>nincs</td></tr>
+        <tr><td>MVM Émász</td><td>térkép (mvmemaszhalozat.hu)</td><td>e-mail, e-mailben igényelve (vevőazonosító + mérésipont-azonosító kell)</td><td>nincs</td></tr>
+        <tr><td>Opus Titász</td><td>áramszünet-kereső (opustitasz.hu)</td><td>saját mobilapp push értesítéssel</td><td>nincs</td></tr>
+        <tr><td>Fővárosi Vízművek</td><td>munkatérkép (vizmuvek.hu)</td><td>honlap, 3 nappal előre; mobilapp</td><td>nincs</td></tr>
+        <tr><td>DMRV</td><td>hírek + RSS</td><td>–</td><td>részben (RSS, szűretlen)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Mind a négy áramelosztó másképp értesít, és egyiknél sincs meghirdetett API vagy RSS; a
+    független tervezettaramszunet.hu aggregátor csak a felületek lekérdezésével dolgozik, és maga
+    is tájékoztató jellegűnek minősíti az adatait. Ez a szabvány ezt a hiányt tölti be.</p>
+
+  <h2><span class="num">6</span>Helyek a telefonon</h2>
+  <div class="panel">
+    <ul>
+      <li>A lakos tetszőleges számú helyet ment (otthon, nyaraló, szülők lakása, úti cél), mindegyikhez
+        egy települést és opcionálisan egy KCR-címazonosítót.</li>
+      <li>Helyenként tárolja a szolgáltatókat (áram, víz, gáz, távhő). Az app a település alapján
+        javasol, a lakos a számlája alapján ellenőrzi.</li>
+      <li>Az „Itt vagyok most” hely határozza meg a Most képernyő riasztásait; a
+        kimaradás-értesítések minden mentett helyre megjelennek.</li>
+      <li>Utazáskor az app a GPS-t <strong>csak helyben</strong> használja a település
+        megállapítására, és csak engedéllyel.</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">7</span>Adatvédelem (GDPR)</h2>
+  <div class="panel">
+    <ul>
+      <li>Push és statikus fájl: személyes adat nem keletkezik.</li>
+      <li>SMS/e-mail: adatkezelő az országos továbbító. Cél: kimaradás-értesítés. Tárolt adat:
+        elérhetőség és településkódok. Jogalap: hozzájárulás, bármikor visszavonható, a törlés
+        azonnali.</li>
+      <li>Cím, KCR-azonosító és a szolgáltatói ügyfélszám soha nem kerül a továbbítóhoz.</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">8</span>Szolgáltatói bevezetés</h2>
+  <div class="panel">
+    <ol>
+      <li>A szolgáltató tanúsítványt kap a gyökérkulcs alól: <code>service</code> = saját
+        szolgáltatása, <code>regions</code> = ellátott települések listája.</li>
+      <li>A meglévő üzemzavar-kezelő rendszeréből (amely ma a weboldali térképet táplálja)
+        exportál a 3. pont szerinti JSON-ba.</li>
+      <li>Az aláírt fájlt a saját webhelyén teszi közzé, és a push-továbbítónak is elküldi.</li>
+      <li>Tesztüzem <code>status: "Exercise"</code> értékkel, amit a telefon nem jelenít meg
+        riasztásként.</li>
+    </ol>
+  </div>
+
+  <h2><span class="num">9</span>Nyitott kérdések</h2>
+  <div class="panel">
+    <ul>
+      <li>Ki üzemelteti az országos továbbítót (katasztrófavédelem, MEKH vagy állami
+        IT-szolgáltató)?</li>
+      <li>Kötelező legyen-e a szolgáltatóknak (MEKH-előírás), vagy önkéntes?</li>
+      <li>A KCR-azonosítók nyilvánosan letölthetők-e a telefonra településenként?</li>
+      <li>A kisebb víziközmű-szolgáltatóknak kell-e közös, egyszerű feltöltő felület?</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">+</span>Mintafájlok</h2>
+  <div class="panel">
+    <p>Kitalált adatokkal, a szabványt bemutatva — letöltés és leírás:
+      <a href="minta/">minta/</a></p>
+    <ul>
+      <li><a href="minta/kozmu/eon_bp/budapest.json"><code>kozmu/eon_bp/budapest.json</code></a> –
+        alkalmazásoknak: a teljes, strukturált forma</li>
+      <li><a href="minta/kozmu/eon_bp/budapest.rss"><code>kozmu/eon_bp/budapest.rss</code></a> –
+        honlapoknak, RSS-olvasóknak</li>
+      <li><a href="minta/kozmu/fv/budapest.json"><code>kozmu/fv/budapest.json</code></a> – egy vízmű
+        ugyanebben a formában</li>
+      <li><a href="minta/tomor.txt"><code>tomor.txt</code></a> – SMS, QR-kód, Bluetooth: egysoros,
+        tömör forma</li>
+      <li><a href="minta/kozmu/index.json"><code>kozmu/index.json</code></a> – a szolgáltatók
+        jegyzéke</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div><strong>Közmű-kimaradási értesítés (K1) – tervezet</strong><br>2026. november</div>
+    <div>
+      <a href="index.html">Kezdőlap</a> ·
+      <a href="peticio.html">Petíció</a> ·
+      <a href="javaslat.html">Javaslat</a> ·
+      <a href="https://github.com/madcsaba/kozmu-ertesites">Forrás</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
