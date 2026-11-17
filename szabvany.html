@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A szabvány (K1) – Közmű-kimaradási értesítés</title>
-<meta name="description" content="A KÖZMÜ-KIMARADÁS K1 szabványtervezet teljes műszaki leírása: alapelvek, kódlisták, JSON- és SMS-forma, terjesztés, adatvédelem, bevezetés.">
+<title>Kommunikációs protokoll (K1) – Közmű-kimaradási értesítés</title>
+<meta name="description" content="A KÖZMŰ-KIMARADÁS K1 kommunikációs protokoll tervezetének teljes műszaki leírása: alapelvek, kódlisták, JSON- és SMS-forma, terjesztés, szerepek és lekérdezés, adatvédelem, bevezetés.">
 <meta name="theme-color" content="#f7f5f0">
 <link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/site.css">
@@ -17,7 +17,7 @@
     <a href="index.html">Kezdőlap</a>
     <a href="peticio.html">Petíció</a>
     <a href="javaslat.html">Javaslat</a>
-    <a class="on" href="szabvany.html">Szabvány</a>
+    <a class="on" href="szabvany.html">Protokoll</a>
     <a href="https://madcsaba.github.io/felkeszules-kezikonyv/app/">Demó app</a>
   </span>
 </nav>
@@ -25,7 +25,7 @@
 <main class="wrap">
 
   <header class="hero">
-    <h1>Közmű-kimaradási értesítés – javasolt szabvány</h1>
+    <h1>Közmű-kimaradási értesítés – kommunikációs protokoll (tervezet)</h1>
     <p class="sub">Tervezet, 2026. november. Mintafájlok: <a href="minta/">minta/</a>.
       Petíció: <a href="peticio.html">peticio.html</a> · Szakpolitikai javaslat:
       <a href="javaslat.html">javaslat.html</a> · Eredeti forrás:
@@ -34,6 +34,10 @@
       olvasható, aláírt</strong> formában közöljék a kimaradásokat, és a lakos telefonja a
       <strong>saját helyeire</strong> szűrve, <strong>a saját nyelvén</strong> mutassa meg, miért
       nincs áram vagy víz.</p>
+    <p class="sub">Ez a dokumentum a <strong>kommunikációs protokoll</strong> tervezete: a technikai
+      csere szabályait írja le. A belőle származó, a szolgáltatókra nézve kötelező
+      <strong>szabványt a MEKH adhatja ki</strong> — a protokoll a technika, a szabvány a jogi
+      kényszer.</p>
   </header>
 
   <h2 id="alapelvek"><span class="num">1</span>Alapelvek</h2>
@@ -140,7 +144,7 @@
       kezelni, nem szolgáltatónként. Így a lakos egyszer adja meg az elérhetőségét, akárhány helye
       és szolgáltatója van, és egy helyen tudja visszavonni.</p>
     <p>A szolgáltatók meglévő, ingatlanhoz kötött értesítései (például az E.ON online
-      ügyfélszolgálatán beállítható SMS és e-mail) megmaradnak. Ez a szabvány nem kiváltja őket,
+      ügyfélszolgálatán beállítható SMS és e-mail) megmaradnak. Ez a protokoll nem kiváltja őket,
       hanem egységes, nyelvfüggetlen csatornát ad melléjük.</p>
   </div>
 
@@ -188,10 +192,46 @@
   <p>Mind a négy áramelosztó másképp értesít, és egyiknél sincs meghirdetett API vagy RSS; a
     vidéki vízműveknél sincs más: az értesítés honlapi hír, Facebook-poszt vagy önkormányzati
     közlemény. Két megállapítás mégis biztató: a ZalaVíz külön „Vízhiány” rovatot vezet, a
-    Nemzeti Vízművek pedig anyavállalati szinten is bevezethetné a szabványt a hozzá tartozó
+    Nemzeti Vízművek pedig anyavállalati szinten is bevezethetné a protokollt a hozzá tartozó
     több mint tucat vidéki vízműnél. A független tervezettaramszunet.hu aggregátor csak a
     felületek lekérdezésével dolgozik, és maga is tájékoztató jellegűnek minősíti az adatait.
-    Ez a szabvány ezt a hiányt tölti be.</p>
+    Ez a protokoll tölti be ezt a hiányt.</p>
+
+  <h3>5/c. A protokoll működése: szerepek, lekérdezés, hibák, verziók</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Szerep</th><th>Mit csinál</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Kiadó</strong> (szolgáltató)</td><td>közzéteszi az aláírt fájlt a saját webhelyén, és elküldi a továbbítónak</td></tr>
+        <tr><td><strong>Fogyasztó</strong> (app, honlap)</td><td>lekérdezi a mentett helyei településeit, ellenőrzi az aláírást, megjelenít</td></tr>
+        <tr><td><strong>Továbbító</strong> (országos)</td><td>push, SMS, e-mail: témára iratkozás, személyes adat nélkül</td></tr>
+        <tr><td><strong>Hitelesítő hatóság</strong></td><td>tanúsítványláncot ad ki és von vissza; a fogyasztó ennek alapján ellenőriz</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel">
+    <p>Egy szereplő többet is betölthet (pl. a továbbító maga is fogyasztó).</p>
+    <ul>
+      <li><strong>Lekérdezés:</strong> GET <code>…/kozmu/{szolgáltató}/{település}.json</code>; a
+        válasz <code>ETag</code>-et küld, a következő kérés <code>If-None-Match</code>-el rákérdez —
+        változatlan fájlnál <code>304 Not Modified</code>, pár száz bájt. Javasolt gyakoriság: aktív
+        eseménynél 1 perc, nyugalomban 15 perc (vagy hálózat és akkumulátor szerint). A
+        push-továbbítót a szolgáltató értesíti, az nem kérdezget.</li>
+      <li><strong>Hibakezelés:</strong> ismeretlen kód → a fogyasztó a nyers üzenetet jeleníti meg,
+        nem dobja el; hibás vagy hiányzó aláírás → „nem hitelesített” jelzés, riasztás nincs; lejárt
+        <code>expectedRestore</code> → automatikus frissítéskérés, majd „a helyreállítás késik”
+        jelzés; <code>status: "Exercise"</code> → teszt, nem riasztás.</li>
+      <li><strong>Verziókezelés:</strong> minden üzeneten <code>v: "K1"</code>. Az új verzió csak
+        additív: új opcionális mező vagy új kód — a meglévők jelentése nem változik. Más jelentés =
+        új betűjel (<code>K2</code>), amit párhuzamosan kell támogatni egy átmeneti időszakban.</li>
+      <li><strong>Konformancia:</strong> a <a href="minta/">minta/</a> fájlok az elfogadási halmaz.
+        Kötelező mezők: <code>v</code>, <code>id</code>, <code>issuer</code>, <code>sent</code>,
+        <code>status</code>, <code>msgType</code>, <code>service</code>, <code>kind</code>,
+        <code>state</code>, <code>area</code>, <code>sig</code>. Az <code>id</code> formátuma
+        <code>{kiadó}-{dátum}-{sorszám}</code>; az <code>area.settlements</code> KSH-törzsszám; az
+        aláírás Ed25519 a kiadó kulcsával.</li>
+    </ul>
+  </div>
 
   <h2><span class="num">6</span>Helyek a telefonon</h2>
   <div class="panel">
@@ -244,7 +284,7 @@
 
   <h2><span class="num">+</span>Mintafájlok</h2>
   <div class="panel">
-    <p>Kitalált adatokkal, a szabványt bemutatva — letöltés és leírás:
+    <p>Kitalált adatokkal, a protokollt bemutatva — letöltés és leírás:
       <a href="minta/">minta/</a></p>
     <ul>
       <li><a href="minta/kozmu/eon_bp/budapest.json"><code>kozmu/eon_bp/budapest.json</code></a> –

@@ -1,6 +1,6 @@
 # Mintafájlok – KÖZMŰ-KIMARADÁS K1
 
-**DEMÓ: minden adat kitalált.** A fájlok azt mutatják meg, mit kellene egy szolgáltatónak közzétennie a [`kozmu-ertesites.md`](../kozmu-ertesites.md) szerinti szabvány alapján.
+**DEMÓ: minden adat kitalált.** A fájlok azt mutatják meg, mit kellene egy szolgáltatónak közzétennie a [`kozmu-ertesites.md`](../kozmu-ertesites.md) szerinti protokoll alapján.
 
 | Fájl | Kinek szól |
 |---|---|

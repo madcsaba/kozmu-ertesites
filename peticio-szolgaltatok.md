@@ -19,7 +19,7 @@ Tudjuk, hogy Önök sokat tesznek a tájékoztatásért: a térképes keresők, 
 3. **Jelöljék az okot és a várható helyreállítást kóddal**, ne csak szövegben, így a telefon bármilyen nyelvre lefordíthatja.
 4. **Hitelesítsék digitális aláírással**, hogy senki ne terjeszthessen hamis „vízhiány”- vagy „áramszünet”-üzenetet az Önök nevében.
 5. **Jelezzék a helyreállítást is**, ne csak a kezdetet, hogy tudjuk, mikor lehet újra bekapcsolni a hűtőt vagy a kazánt.
-6. **Üljenek le a többi szolgáltatóval és az illetékes minisztériumokkal**, és egyezzenek meg egy közös szabványban. Ehhez szabványjavaslatot és működő bemutatót is mellékelünk.
+6. **Üljenek le a többi szolgáltatóval és az illetékes minisztériumokkal**, és egyezzenek meg egy közös szabványban. Ehhez a kommunikációs protokoll tervezetét és működő bemutatót is mellékelünk.
 
 **Miért jó ez Önöknek is?** Kevesebb telefonhívás érkezik a hibabejelentőre olyan hibáról, amelyről már tudnak. Az önkormányzatoknak nem kell kézzel átmásolniuk az értesítéseket. Vihar vagy hőhullám idején a katasztrófavédelem pontos képet kap. Az ügyfelek pedig inkább megértik a kimaradást, ha tudják, miért van, és meddig tart.
 

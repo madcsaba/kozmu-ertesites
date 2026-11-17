@@ -35,7 +35,7 @@
 
 ## Ütemezés és költség
 
-- **0–6. hónap:** szabványtervezet társadalmi egyeztetése a szolgáltatókkal, a MEKH-hel és a katasztrófavédelemmel; kísérleti üzem egy áramelosztóval és egy vízművel.
+- **0–6. hónap:** protokolltervezet társadalmi egyeztetése a szolgáltatókkal, a MEKH-hel és a katasztrófavédelemmel; kísérleti üzem egy áramelosztóval és egy vízművel.
 - **6–12. hónap:** kötelező közzététel a négy áramelosztónál; a víziközmű-szolgáltatóknál önkéntes, a kisebbeknek közös, egyszerű feltöltőfelület.
 - **12–24. hónap:** kötelező a víz-, gáz- és távhőszolgáltatóknak is; az országos továbbító indulása.
 - **Költség:** a szolgáltatóknál a meglévő üzemzavar-kezelő rendszerük (amely ma a weboldali térképet táplálja) egy exportfelülettel bővül; a közzététel statikus fájl, külön infrastruktúra nem kell. Állami oldalon a tanúsítványkezelés és a továbbító üzemeltetése. Becsült nagyságrendet a kísérleti üzem adna.

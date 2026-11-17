@@ -1,6 +1,8 @@
-# Közmű-kimaradási értesítés – javasolt szabvány
+# Közmű-kimaradási értesítés – kommunikációs protokoll (tervezet)
 
 Tervezet, 2026. november. Mintafájlok: [`minta/`](minta/). Petíció és szakpolitikai javaslat: [`peticio-szolgaltatok.md`](peticio-szolgaltatok.md), [`szakpolitikai-javaslat.md`](szakpolitikai-javaslat.md). Célja, hogy az áram-, víz-, gáz- és távhőszolgáltatók **egyféle, géppel olvasható, aláírt** formában közöljék a kimaradásokat, és a lakos telefonja a **saját helyeire** szűrve, **a saját nyelvén** mutassa meg, miért nincs áram vagy víz.
+
+Ez egy **kommunikációs protokoll** tervezete: a technikai csere szabályait írja le. A belőle származó, a szolgáltatókra nézve kötelező **szabványt a MEKH adhatja ki** — a protokoll a technika, a szabvány a jogi kényszer.
 
 ## 1. Alapelvek
 
@@ -81,7 +83,7 @@ K1|E|Z|F|c4|<KSH-kód>|<kezdet>|<várható vég>|eon_bp|<aláírás>
 
 Az SMS- és e-mail-feliratkozást **egy helyen**, az országos továbbítónál kell kezelni, nem szolgáltatónként. Így a lakos egyszer adja meg az elérhetőségét, akárhány helye és szolgáltatója van, és egy helyen tudja visszavonni.
 
-A szolgáltatók meglévő, ingatlanhoz kötött értesítései (például az E.ON online ügyfélszolgálatán beállítható SMS és e-mail) megmaradnak. Ez a szabvány nem kiváltja őket, hanem egységes, nyelvfüggetlen csatornát ad melléjük.
+A szolgáltatók meglévő, ingatlanhoz kötött értesítései (például az E.ON online ügyfélszolgálatán beállítható SMS és e-mail) megmaradnak. Ez a protokoll nem kiváltja őket, hanem egységes, nyelvfüggetlen csatornát ad melléjük.
 
 ## 5/a. RSS/Atom kimenet
 
@@ -115,7 +117,25 @@ A szolgáltatói JSON-ból a build gépi úton településenkénti RSS/Atom csat
 | ÉRV (Kazincbarcika) | hírek + Facebook | településenkénti értesítés jellemzően a közösségi oldalon | nincs |
 | Bakonykarszt (Veszprém) | „Vízhiány” oldal + Facebook | aktuális vízhiány-oldal; 0–24 órás diszpécser | nincs |
 
-Mind a négy áramelosztó másképp értesít, és egyiknél sincs meghirdetett API vagy RSS; a vidéki vízműveknél sincs más: az értesítés honlapi hír, Facebook-poszt vagy önkormányzati közlemény. Két megállapítás mégis biztató: a ZalaVíz külön „Vízhiány” rovatot vezet, a Nemzeti Vízművek pedig anyavállalati szinten is bevezethetné a szabványt a hozzá tartozó több mint tucat vidéki vízműnél. A független tervezettaramszunet.hu aggregátor csak a felületek lekérdezésével dolgozik, és maga is tájékoztató jellegűnek minősíti az adatait. Ez a szabvány ezt a hiányt tölti be.
+Mind a négy áramelosztó másképp értesít, és egyiknél sincs meghirdetett API vagy RSS; a vidéki vízműveknél sincs más: az értesítés honlapi hír, Facebook-poszt vagy önkormányzati közlemény. Két megállapítás mégis biztató: a ZalaVíz külön „Vízhiány” rovatot vezet, a Nemzeti Vízművek pedig anyavállalati szinten is bevezethetné a protokollt a hozzá tartozó több mint tucat vidéki vízműnél. A független tervezettaramszunet.hu aggregátor csak a felületek lekérdezésével dolgozik, és maga is tájékoztató jellegűnek minősíti az adatait. Ez a protokoll tölti be ezt a hiányt.
+
+## 5/c. A protokoll működése: szerepek, lekérdezés, hibák, verziók
+
+**Szerepek:**
+
+| Szerep | Mit csinál |
+|---|---|
+| **Kiadó** (szolgáltató) | közzéteszi az aláírt fájlt a saját webhelyén, és elküldi a továbbítónak |
+| **Fogyasztó** (app, honlap) | lekérdezi a mentett helyei településeit, ellenőrzi az aláírást, megjelenít |
+| **Továbbító** (országos) | push, SMS, e-mail: témára iratkozás, személyes adat nélkül |
+| **Hitelesítő hatóság** | tanúsítványláncot ad ki és von vissza; a fogyasztó ennek alapján ellenőriz |
+
+Egy szereplő többet is betölthet (pl. a továbbító maga is fogyasztó).
+
+- **Lekérdezés:** GET `…/kozmu/{szolgáltató}/{település}.json`; a válasz `ETag`-et küld, a következő kérés `If-None-Match`-el rákérdez — változatlan fájlnál `304 Not Modified`, pár száz bájt. Javasolt gyakoriság: aktív eseménynél 1 perc, nyugalomban 15 perc (vagy hálózat és akkumulátor szerint). A push-továbbítót a szolgáltató értesíti, az nem kérdezget.
+- **Hibakezelés:** ismeretlen kód → a fogyasztó a nyers üzenetet jeleníti meg, nem dobja el; hibás vagy hiányzó aláírás → „nem hitelesített” jelzés, riasztás nincs; lejárt `expectedRestore` → automatikus frissítéskérés, majd „a helyreállítás késik” jelzés; `status: "Exercise"` → teszt, nem riasztás.
+- **Verziókezelés:** minden üzeneten `v: "K1"`. Az új verzió csak additív: új opcionális mező vagy új kód — a meglévők jelentése nem változik. Más jelentés = új betűjel (`K2`), amit párhuzamosan kell támogatni egy átmeneti időszakban.
+- **Konformancia:** a `minta/` fájlok az elfogadási halmaz. Kötelező mezők: `v`, `id`, `issuer`, `sent`, `status`, `msgType`, `service`, `kind`, `state`, `area`, `sig`. Az `id` formátuma `{kiadó}-{dátum}-{sorszám}`; az `area.settlements` KSH-törzsszám; az aláírás Ed25519 a kiadó kulcsával.
 
 ## 6. Helyek a telefonon
 

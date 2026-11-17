@@ -3,7 +3,7 @@
   <channel>
     <title>E.ON – Elmű Hálózati: áramkimaradások, Budapest (DEMÓ)</title>
     <link>https://github.com/madcsaba/felkeszules-kezikonyv/tree/pwa-app/docs/minta</link>
-    <description>Tervezett munkák és üzemzavarok a KÖZMŰ-KIMARADÁS K1 szabvány szerint. Minden adat kitalált.</description>
+    <description>Tervezett munkák és üzemzavarok a KÖZMŰ-KIMARADÁS K1 protokoll szerint. Minden adat kitalált.</description>
     <language>hu</language>
     <lastBuildDate>Mon, 16 Nov 2026 10:40:00 +0100</lastBuildDate>
     <atom:link href="budapest.rss" rel="self" type="application/rss+xml"/>

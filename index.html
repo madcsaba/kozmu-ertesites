@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fogyasztóbarát értesítéseket a közműszolgáltatóktól</title>
-<meta name="description" content="Egységes, géppel olvasható, aláírt közmű-kimaradási értesítés: szabványtervezet, petíció a szolgáltatókhoz és szakpolitikai javaslat.">
+<meta name="description" content="Egységes, géppel olvasható, aláírt közmű-kimaradási értesítés: kommunikációs protokoll-tervezet, petíció a szolgáltatókhoz és szakpolitikai javaslat.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fogyasztóbarát értesítéseket a közműszolgáltatóktól">
-<meta property="og:description" content="Egységes, géppel olvasható, aláírt közmű-kimaradási értesítés: szabványtervezet, petíció a szolgáltatókhoz és szakpolitikai javaslat.">
+<meta property="og:description" content="Egységes, géppel olvasható, aláírt közmű-kimaradási értesítés: kommunikációs protokoll-tervezet, petíció a szolgáltatókhoz és szakpolitikai javaslat.">
 <meta name="theme-color" content="#f7f5f0">
 <link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/site.css">
@@ -20,7 +20,7 @@
     <a class="on" href="index.html">Kezdőlap</a>
     <a href="peticio.html">Petíció</a>
     <a href="javaslat.html">Javaslat</a>
-    <a href="szabvany.html">Szabvány</a>
+    <a href="szabvany.html">Protokoll</a>
     <a href="https://madcsaba.github.io/felkeszules-kezikonyv/app/">Demó app</a>
   </span>
 </nav>
@@ -30,20 +30,22 @@
   <header class="hero">
     <h1>Fogyasztóbarát értesítéseket a közműszolgáltatóktól</h1>
     <p class="sub lead">Lejárt a kiragasztott papírcetlik ideje</p>
-    <p class="sub small">Szabványtervezet, petíció a közműszolgáltatókhoz és szakpolitikai javaslat ahhoz,
+    <p class="sub small">Kommunikációs protokoll-tervezet, petíció a közműszolgáltatókhoz és szakpolitikai javaslat ahhoz,
       hogy az áram-, víz-, gáz- és távhőszolgáltatók <strong>egyféle, géppel olvasható, aláírt</strong>
       formában közöljék a kimaradásokat — a lakos pedig a saját helyeire szűrve, a saját nyelvén
       tudja meg, mi történik, mi fog történni.</p>
     <div class="actions">
       <a class="btn" href="peticio.html">✍️ Petíció megtekintése</a>
-      <a class="btn ghost" href="szabvany.html">📐 A szabvány</a>
+      <a class="btn ghost" href="szabvany.html">📐 A protokoll</a>
       <a class="btn ghost" href="javaslat.html">🏛 Szakpolitikai javaslat</a>
     </div>
   </header>
 
   <p class="note"><b>Tervezet, 2026. november.</b> Az oldal szakmai vitaanyag, nem hivatalos szolgáltatás.
     A mintaadatok kitaláltak; a működő bemutatót a
-    <a href="https://madcsaba.github.io/felkeszules-kezikonyv/app/">Felkészülés mobilapp</a> mutatja be.</p>
+    <a href="https://madcsaba.github.io/felkeszules-kezikonyv/app/">Felkészülés mobilapp</a> mutatja be.
+    A technikai leírás a <a href="szabvany.html">kommunikációs protokoll</a> tervezete; a belőle
+    származó, kötelező szabványt a MEKH adhatja ki.</p>
 
   <h2><span class="num">1</span>A probléma</h2>
   <div class="panel">
@@ -95,8 +97,8 @@
     <a class="card" href="javaslat.html"><span class="ico">🏛️</span><h3>Szakpolitikai javaslat</h3>
       <p>Javaslat a minisztériumoknak és a MEKH-nek: kormányrendelet, műszaki szabvány, állami
         tanúsítványlánc, ütemezés és nemzetközi példák.</p></a>
-    <a class="card" href="szabvany.html"><span class="ico">📐</span><h3>A szabvány (K1)</h3>
-      <p>Alapelvek, kódlisták, a teljes JSON-forma, tömör SMS-forma, terjesztési csatornák,
+    <a class="card" href="szabvany.html"><span class="ico">📐</span><h3>A protokoll (K1)</h3>
+      <p>Alapelvek, kódlisták, JSON- és SMS-forma, terjesztés, szerepek és lekérdezés,
         adatvédelem, bevezetési útmutató.</p></a>
     <a class="card" href="minta/"><span class="ico">🗂️</span><h3>Mintafájlok</h3>
       <p>Működő példák kitalált adatokkal: JSON egy településre, RSS-csatorna, tömör SMS-forma és
@@ -133,9 +135,9 @@
   <p>Mind a négy áramelosztó másképp értesít, és egyiknél sincs meghirdetett API vagy RSS —
     és a vidéki vízműveknél sincs más: az értesítés honlapi hír, Facebook-poszt vagy
     önkormányzati közlemény. Két megállapítás mégis biztató: a ZalaVíz külön „Vízhiány”
-    rovatot vezet, a Nemzeti Vízművek pedig anyavállalati szinten is bevezethetné a szabványt
+    rovatot vezet, a Nemzeti Vízművek pedig anyavállalati szinten is bevezethetné a protokollt
     a hozzá tartozó több mint tucat vidéki vízműnél. Részletek a
-    <a href="szabvany.html#helyzet">szabvány 5/b pontjában</a>.</p>
+    <a href="szabvany.html#helyzet">protokoll 5/b pontjában</a>.</p>
 
   <h2><span class="num">5</span>Hogyan néz ki?</h2>
   <div class="panel">
@@ -152,9 +154,10 @@
   "expectedRestore": "2026-11-16T13:30:00+01:00",
   "sig": "ed25519:…"
 }</code></pre>
-    <p>A <a href="szabvany.html">teljes szabvány</a> leírja a kódlistákat, a terjesztési csatornákat
-      (statikus fájl, push, SMS, e-mail, RSS), az adatvédelmi garanciákat és a szolgáltatói
-      bevezetés négy lépését. Példák a <a href="minta/">mintafájlokban</a>.</p>
+    <p>A <a href="szabvany.html">teljes protokoll</a> leírja a kódlistákat, a terjesztési csatornákat
+      (statikus fájl, push, SMS, e-mail, RSS), a szerepeket és a lekérdezés, hibakezelés
+      szabályait, az adatvédelmi garanciákat és a szolgáltatói bevezetés négy lépését. Példák a
+      <a href="minta/">mintafájlokban</a>.</p>
   </div>
 
 </main>
@@ -168,7 +171,7 @@
     <div>
       <a href="peticio.html">Petíció</a> ·
       <a href="javaslat.html">Javaslat</a> ·
-      <a href="szabvany.html">Szabvány</a> ·
+      <a href="szabvany.html">Protokoll</a> ·
       <a href="https://github.com/madcsaba/kozmu-ertesites">Forrás és README</a> ·
       <a href="https://madcsaba.github.io/felkeszules-kezikonyv/">Felkészülési kézikönyv</a>
     </div>
