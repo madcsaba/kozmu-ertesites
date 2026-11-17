@@ -101,6 +101,14 @@ a:hover { color: var(--accent); }
   text-wrap: balance;
 }
 .hero .sub { margin: 0 0 22px; font-size: 19px; color: var(--muted); text-wrap: pretty; }
+.hero .sub.lead {
+  font-size: clamp(20px, 3vw, 24px);
+  font-weight: 650;
+  letter-spacing: -.02em;
+  color: var(--text);
+  text-wrap: balance;
+}
+.hero .sub.small { font-size: 16.5px; margin-bottom: 22px; }
 .hero .actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
 h2 {
