@@ -21,25 +21,8 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #141a1c;
-    --surface: #1b2326;
-    --surface-2: #222c30;
-    --text: #e6ecec;
-    --muted: #a3b0b2;
-    --border: #2f3b3f;
-    --primary: #6cc3b9;
-    --primary-ink: #0d1f1d;
-    --primary-soft: #1d3432;
-    --accent: #e7a467;
-    --accent-soft: #3a2a1a;
-    --danger: #e0877c;
-    --danger-soft: #3a1f1c;
-    --shadow: 0 1px 3px rgba(0, 0, 0, .4);
-  }
-}
+/* A téma mindig világos: a sötét rendszergépi beállítást nem követjük. */
+:root { color-scheme: light; }
 
 * { box-sizing: border-box; }
 
